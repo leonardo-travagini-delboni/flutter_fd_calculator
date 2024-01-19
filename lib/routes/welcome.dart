@@ -12,69 +12,65 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   @override
   void initState() {
-    startTimer();
     super.initState();
+    startTimer();
   }
 
-  startTimer() {
+  startTimer() async {
     var duration = const Duration(seconds: 5);
     return Timer(duration, route);
   }
 
   route() {
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: content(),
-    );
-  }
-
-  Widget content() {
+    // Getting the screen dimensions
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    // Displaying the Welcome screen
     return Column(
-      // Aligning vertically:
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Company logo
-        Container(
-          width: double.infinity,
-          height: 200,
-          color: const Color.fromARGB(255, 255, 255, 255),
-          alignment: Alignment.center,
-          child: Image.asset(
-            'assets/img/black_logo_no_bg.png',
-            width: 200,
-            height: 200,
-          ),
-        ),
-        // Company WebSite
-        Container(
-          width: double.infinity,
-          height: 50,
-          color: const Color.fromARGB(255, 255, 255, 255),
-          alignment: Alignment.center,
-          child: const Text(
-            'www.delboniti.com',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-          ),
-        ),
-        // Progress bar
-        Container(
-          width: double.infinity,
-          height: 50,
-          padding: const EdgeInsets.all(20.0),
-          color: const Color.fromARGB(255, 255, 255, 255),
-          alignment: Alignment.center,
-          child: const LinearProgressIndicator(
-            backgroundColor: Color.fromARGB(255, 255, 255, 255),
-            valueColor: AlwaysStoppedAnimation<Color>(
-              Color.fromARGB(255, 0, 0, 0),
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.blue.shade800,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'DESENVOLVIDO POR',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Image.asset(
+                    'assets/img/leo.jpg',
+                    width: screenWidth * 0.7,
+                    height: screenHeight * 0.3,
+                  ),
+                  const Text(
+                    'www.leonardodelboni.com.br',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.1),
+                  LinearProgressIndicator(
+                    valueColor:
+                        const AlwaysStoppedAnimation<Color>(Colors.white),
+                    backgroundColor: Colors.blue.shade800,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
